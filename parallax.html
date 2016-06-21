@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+
+		<!-- // <script   src="https://code.jquery.com/jquery-2.2.3.min.js"   integrity="sha256-a23g1Nt4dtEYOj7bR+vTu7+T8VP13humZFBJNIYoEJo="   crossorigin="anonymous"></script> -->
+
+
+
+		<style>
+			body{
+				margin: 0;
+				padding: 0;
+			}
+			ul{
+				margin: 0;
+				padding: 0;
+			}
+			ul li{
+				list-style: none;
+				overflow: hidden;
+				height: 600px;
+				position: relative;
+			}
+
+			.parallax-background{
+				height: 700px;
+			}
+
+			/*.beach{
+				background-image: url('http://cdn.wonderfulengineering.com/wp-content/uploads/2016/01/beach-wallpaper-3.jpg'); 
+			}
+			.mountain{
+				background-image: url('http://www.seeds4thesoul.com/wp-content/uploads/2015/08/mountain-reflections-norway-mountain-backgrounds-mountain-norway-reflections-26010.jpg'); 
+			}
+			.eagle{
+				background-image: url('https://pgcpsmess.files.wordpress.com/2014/03/bald-eagle-wallpapers-flight.jpg'); 
+			}
+			.nyc{
+				background-image: url('http://www.getsready.com/wp-content/uploads/2015/08/New-York-City-3.jpg'); 
+			}*/
+
+			.beach{
+				background-image: url('images/beach.jpg'); 
+				background-size: cover;
+			}
+			.mountain{
+				background-image: url('images/lens.jpg'); 
+				background-position: 40% 50%;
+			}
+			.eagle{
+				background-image: url('images/universe.jpg'); 
+			}
+			.nyc{
+				background-image: url('images/nyc.jpg'); 
+				background-size: cover;
+			}
+
+			ul li .subcontent{
+				position: absolute;
+				top: 100px;
+				left: 100px;
+				color: white;
+				font-family: helvetico;
+			}
+
+			h1{
+				font-size: 70px;
+				margin-bottom: 0px;
+				text-shadow: 2px 2px 6px red;
+			}
+
+			h2{
+				font-size: 40px;
+				text-shadow: 2px 2px 6px red;
+				
+			}
+
+
+		</style>
+
+	</head>
+
+	<body>
+		<ul class="parallax">
+			<li>
+				<div class="parallax-background beach"></div>
+				<div class="subcontent">
+					<h1>California Sunset Beach</h1>
+					<h2>Hey there, enjoy the beautiful scene.</h2>
+				</div>
+			</li>
+			<li>
+				<div class="parallax-background mountain"></div>
+				<div class="subcontent">
+					<h1>Camera lens</h1>
+					<h2>Ready to take some photos?</h2>
+				</div>
+			</li>
+			<li>
+				<div class="parallax-background eagle"></div>
+				<div class="subcontent">
+					<h1>Fantacy Galaxy</h1>
+					<h2>You will never forget this coolest thing</h2>
+				</div>
+			</li>
+			<li>
+				<div class="parallax-background nyc"></div>
+				<div class="subcontent">
+					<h1>New York City</h1>
+					<h2>Any doubts about one of the world's biggest City?</h2>
+				</div>
+			</li>	
+
+
+
+		</ul>
+
+
+
+		
+
+		<script src="https://code.jquery.com/jquery-1.12.3.min.js" integrity="sha256-aaODHAgvwQW1bFOGXMeX+pC4PZIPsvn2h1sArYOhgXQ=" crossorigin="anonymous"></script>
+
+
+
+		<script>
+
+			(function($){
+
+				var $container=$(".parallax");
+				var $divs=$container.find("div.parallax-background");
+				var thingBeingScrolled=document.body;
+				var liHeight=$divs.eq(0).closest("li").height();
+				var diffHeight=$divs.eq(0).height()-liHeight;
+
+				console.log(liHeight);
+				console.log(diffHeight);
+
+				var i, len, div, li, offset, scroll, top;
+
+				var render=function(){
+					// console.log('Hi');
+
+					top=thingBeingScrolled.scrollTop;
+
+					//loop through divs
+					for (i=0, len=$divs.length; i < len; i++) {
+						
+
+						//get one div
+						div=$divs[i];
+
+						//get the parent LI
+						li=div.parentNode;
+
+						//calculate the offsetTOP of div
+						offset=$(div).offset().top;
+
+						//calculate the amount to scroll
+						scroll=Math.round(((top-offset)/liHeight)*diffHeight);
+
+						//apply the scroll amount
+						div.style.webkitTransform="translate3d(0px, "+scroll+"px, 0px)";
+
+
+					};
+
+
+				};
+
+
+				(function loop(){
+
+					requestAnimationFrame(loop);
+					render();
+				})();
+
+
+
+			})(jQuery);
+
+		</script>
+
+
+	</body>
+
+
+
+
+</html>
